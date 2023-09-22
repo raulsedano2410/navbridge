@@ -24,14 +24,65 @@ header {
 	color: var(--textColor);
 }
 
-nav a {
+nav .link {
 	margin: 0 1rem;
 	color: var(--textColor);
+	padding-bottom: .5rem;
 	text-decoration: none;
+  position: relative;
+  text-decoration: none;
 }
 
-nav a:hover {
-	color: var(--secondaryColor);
+nav .link::before,
+nav .link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: var(--textColor);
+  bottom: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+nav .link::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav .link::after {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+nav .link:hover::before,
+nav .link:hover::after {
+  width: 100%; /* Ancho total que quieres para el borde inferior */
+}
+
+nav .link.active {
+  position: relative;
+  text-decoration: none;
+}
+
+nav .link.active::before,
+nav .link.active::after {
+  content: '';
+  position: absolute;
+  width: 100%; /* Ancho total del borde inferior */
+  height: 2px;
+  background-color: var(--textColor);
+  bottom: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+nav .link.active::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav .link.active::after {
+  right: 50%;
+  transform: translateX(50%);
 }
 
 header .nav-btn {
@@ -51,6 +102,24 @@ nav {
 	display: flex;
 	align-items: center;
 }
+.contact {	margin: 0 1rem;
+	color: var(--textColor);
+	padding-bottom: .5rem;
+  text-decoration: none;
+	padding: 1rem;
+	border-radius: 25px;
+	border: solid var(--textColor) 2px;
+	transition: background-color 0.3s ease-in;
+}
+
+
+.active_contact,
+.contact:hover {
+	background-color: var(--textColor);
+  color: var(--mainColor);
+  transition: background-color 0.3s ease-in;
+}
+
 
 @media only screen and (max-width: 1024px) {
 	header .nav-btn {
@@ -83,7 +152,8 @@ nav {
 		right: 2rem;
 	}
 
-	nav a {
-		font-size: 1.5rem;
+	nav .link {
+		font-size: 1rem;
+
 	}
 }
