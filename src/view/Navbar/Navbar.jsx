@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import styles from './Navbar.module.css';
-// import logo from '../../assets/logo-sgv.svg';
 import { Link, useMatch } from 'react-router-dom';
 
 const Navbar = () => {
