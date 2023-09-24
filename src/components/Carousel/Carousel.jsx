@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Carousel.module.css';
+import styled from 'styled-components';
 
 const Carousel = () => {
   const images = [
@@ -7,7 +8,6 @@ const Carousel = () => {
     'banner-gmdss.jpg',
     'banner-inicio.jpg',
   ];
-
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [loaded, setLoaded] = useState(false);
@@ -19,7 +19,7 @@ const Carousel = () => {
       const nextIndex = condition ? selectedIndex - 1 : images.length - 1;
       setSelectedImage(images[nextIndex]);
       setSelectedIndex(nextIndex);
-    }, 300);
+    }, 400);
   };
 
   const next = () => {
@@ -35,12 +35,23 @@ const Carousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       next();
-    }, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   });
 
+  const goToSlide = (slideIndex) => {
+    if (selectedIndex !== slideIndex) setLoaded(false);
+
+    setTimeout(() => {
+      setSelectedImage(images[slideIndex]);
+      setSelectedIndex(slideIndex);
+    }, 500);
+  };
+
   return (
-    <div className={styles.container}>
+    <ImgBackground
+      className={styles.container}
+      $selectedImage={selectedImage}>
       <div className={styles.carousel}>
         <img
           className={loaded ? `${styles.loaded}` : ''}
@@ -58,25 +69,39 @@ const Carousel = () => {
           onClick={previous}>
           &#8249;
         </button>
+        <div className={styles.dots_container}>
+          {images.map((_, i) => (
+            <div
+              key={i}
+              className={`${styles.dot_item} ${
+                i === selectedIndex ? styles.active : ''
+              }`}
+              onClick={() => goToSlide(i)}>
+              &#9865;
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </ImgBackground>
   );
 };
 
 export default Carousel;
 
-// const selectNewImage = (index, images, next = true) => {
-//   const condition = next
-//     ? selectedIndex < images.length - 1
-//     : selectedIndex > 0;
+const ImgBackground = styled.div`
+  position: relative;
 
-//   const nextIndex = next
-//     ? condition
-//       ? selectedIndex + 1
-//       : 0
-//     : condition
-//     ? selectedIndex - 1
-//     : images.length - 1;
-//     setSelectedImage(images[nextIndex])
-//     setSelectedIndex(nextIndex)
-// };
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    background-image: url(${(props) =>
+      require(`../../assets/banners/${props.$selectedImage}`)});
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+  }
+`;

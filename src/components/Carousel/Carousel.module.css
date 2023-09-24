@@ -6,18 +6,26 @@
 }
 .carousel{
   position: relative;
+  overflow: hidden;
 }
 img{
   max-width: 100%;
   width: 100%;
   height: 70vh;
-  opacity: 0;
-  transition: 1s;
   object-fit: cover;
+
+  opacity: 0;
+  transform: scale(.2);
+
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+
 }
 
 img.loaded {
   opacity: 1;
+  transform: scale(1);
 }
 .button_previous{
   position: absolute;
@@ -48,4 +56,26 @@ img.loaded {
   color: #ffffff;
   z-index: 1;
   cursor: pointer;
+}
+.dots_container{
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  background-color: transparent;
+  z-index: 1;
+}
+.dot_item{
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+
+}
+.active{
+  color: #ccc;
+  font-size: 30px;
+
 }
