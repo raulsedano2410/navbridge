@@ -13,7 +13,7 @@ import Navbar from './view/Navbar/Navbar';
 
 function App() {
   return (
-    <div>
+    <div className='App'>
       <Navbar />
       <Routes>
         <Route

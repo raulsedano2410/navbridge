@@ -1,6 +1,7 @@
 .container_banner{
   width: 100%;
-  background-color: red;
+  height: 100vh;
+
 }
 .banner{
   height: 80vh;

@@ -1,15 +1,11 @@
 import React from 'react';
-import banner from '../../assets/banner-barco.jpg';
-import styles from './Home.module.css'
+import styles from './Home.module.css';
+import Carousel from '../../components/Carousel/Carousel';
 
 const Home = () => {
   return (
     <div className={styles.container_banner}>
-      <img
-      className={styles.banner}
-        src={banner}
-        alt='Banner from NAV BRIDGE SERVICE'
-      />
+      <Carousel />;
     </div>
   );
 };
